@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIFA-AI Master</title>
+    <!-- Font from google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
+     <!--icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+
+      <!-- loding screen-->
+       <div class="loader">
+             <div class="loader-text">Loading....</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+      </div>
+
+
+    <!-- navigation-->
+     <nav>
+        <div class="nav-container">
+           <div class="logo">AIFA</div>
+
+          <ul class="nav-links">
+             <li><a href="#">HOME</a></li>
+             <li><a href="#smoosh">SMOOSH</a></li>
+             <li><a href="#">AURAX</a></li>
+             <li><a href="#">MACCIE</a></li>
+          </ul>
+          
+
+         <div class="menu-toggle" id="menuToggle">
+               <span></span>
+               <span></span>
+               <span></span>
+         </div>
+        </div>
+     </nav>
+
+     <!--mobile menu-->
+     <div class="mobile-menu" id="mobileMenu">
+         <a href="#">HOME</a>
+         <a href="#smoosh">SMOOSH</a>
+         <a href="#">AURAX</a>
+         <a href="#">MACCIE</a>
+     </div>
+
+
+
+     <!--content section-->
+     
+     <div class="content">
+        <main>
+        <div class="tag-box">
+            <div class="tag">INTRODUCING &wedbar;</div>
+        </div>
+
+         <h1 class="headd">AIFA <br> COMPLETE AI SOLUTIONS
+        </h1>
+
+        <p class="description">
+        AIFA is your all-in-one AI-powered platform, combining an image generator,chatbot and image finder in one sleek interface.
+        </p>      
+     </main>
+
+   <spline-viewer class="robot3d"    
+    url="https://prod.spline.design/5XsHGDeu1t8W8abE/scene.splinecode">
+   </spline-viewer>
+     </div>
+
+
+
+ <!--smoosh section -->
+
+  <section class="smoosh" id="smoosh">
+  <div class="smoosh-main">
+
+    <!-- LEFT SIDE -->
+    <div class="smoosh-left">
+          <div class="left-wrapper">
+      <header class="smoosh-header">
+        <div class="logo">
+          <h1>SMOOSH<br>AI IMAGE<br>GENERATOR</h1>
+        </div>
+      </header>
+
+      <p>
+        Transform your imagination into stunning visuals with advanced AI technology.
+        Describe your vision and watch it come to life in seconds.
+      </p>
+
+      <!-- WRAPPED FORM + GALLERY -->
+      <div class="prompt-section">
+        <form action="#" class="prompt-form">
+          <div class="prompt-container">
+            <textarea class="prompt-input" 
+                      placeholder="Describe your imagination in detail..." 
+                      required></textarea>
+            <button type="button" class="prompt-btn">
+              <i class="fa-solid fa-dice"></i>
+            </button>
+          </div>
+
+          <div class="prompt-actions">
+            <!-- Model Select -->
+            <div class="select-wrapper">
+             <select class="custom-select" id="model-select" required>
+             <option value="" selected disabled>Select Style</option>
+  <option value="fantasy">Fantasy</option>
+  <option value="sci-fi">Sci-Fi</option>
+  <option value="anime">Anime</option>
+  <option value="realistic">Realistic</option>
+  <option value="cyberpunk">Cyberpunk</option>
+  <option value="watercolor">Watercolor Painting</option>
+  <option value="steampunk">Steampunk</option>
+</select>
+
+            </div>
+
+            <!-- Image Count -->
+            <div class="select-wrapper">
+              <select class="custom-select" id="count-select" required>
+                <option value="" selected disabled>Image Count</option>
+                <option value="1">1 Image</option>
+                <option value="2">2 Images</option>
+                <option value="3">3 Images</option>
+                <option value="4">4 Images</option>
+              </select>
+            </div>
+
+            <!-- Aspect Ratio -->
+            <div class="select-wrapper">
+              <select class="custom-select" id="ratio-select" required>
+                <option value="" selected disabled>Aspect Ratio</option>
+                <option value="1/1">Square (1:1)</option>
+                <option value="16/9">Landscape (16:9)</option>
+                <option value="9/16">Portrait (9:16)</option>
+              </select>
+            </div>
+
+            <!-- Generate Button -->
+            <button type="submit" class="generator-btn">
+              <i class="fa-solid fa-wand-sparkles"></i>
+              Generate
+            </button>
+          </div>
+        </form>
+
+        <!-- Gallery output -->
+        <div class="gallery-grid"></div>
+      </div>
+              </div>
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="smoosh-right">
+      <div class="icon-box">
+        <img src="save.webp" width="500px" height="500px" />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!--aurax section-->
+   <div class="aurax-container">
+    <header class="aurax-header">
+      <h1 class="auraxhead">Hello, there</h1>
+      <h2 class="auraxsub">How can I help you?</h2>
+    </header>
+
+    <ul class="suggestions">
+      <li class="suggestions-item">
+        <p class="text">Design a home office setup for remote work</p>
+        <span class="material-symbols-rounded">draw</span>
+      </li>
+
+      <li class="suggestions-item">
+        <p class="text">How can i level up my web development expertise
+          in 2025?
+        </p>
+        <span class="material-symbols-rounded">lightbulb</span>
+      </li>
+
+      <li class="suggestions-item">
+        <p class="text">Suggest some useful tools for debugging JavaScript code.</p>
+        <span class="material-symbols-rounded">explore</span>
+      </li>
+
+      <li class="suggestions-item">
+        <p class="text">Create a React JS component for the simple todo list app.</p>
+        <span class="material-symbols-rounded">code_blocks</span>
+      </li> 
+    </ul>
+
+
+   <div class="aurax-prompt-container">
+    <div class="aurax-prompt-wrapper">
+      <form action="#" class="aurax-prompt-form">
+        <input type="aurax-text" placeholder="Ask Aurax" class="aurax-prompt-input" required>
+        <div class="aurax-prompt-actions">
+          <button id="add-file-btn" type="button"
+           class="material-symbols-rounded">attach_file</button>
+          <button id="send-prompt-btn" 
+           class="material-symbols-rounded">arrow_upward</button>
+        </div>
+      </form>
+
+
+        <button id="delete-chats-btn" 
+           class="material-symbols-rounded">delete</button>
+    </div>
+
+    <p class="disclaimer-text">Aurax can make mistakes, so double-check it.</p>
+
+   </div>
+
+   </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- GSAP Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script src="app.js"></script>
+
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.13/build/spline-viewer.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+
+
+
+</body>
+</html>
