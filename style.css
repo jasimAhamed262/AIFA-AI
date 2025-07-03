@@ -769,10 +769,13 @@ pointer-events: auto;
 
 /** aurax section **/
 .aurax-container{
+    overflow-y: auto;
     padding: 32px 0 60px;
+    max-height: calc(100vh - 127px);
+    scrollbar-color: #ccc tra nsparent;
 }
 
-.aurax-container :where(.aurax-header, .suggestions, .aurax-prompt-wrapper, .disclaimer-text) {
+.aurax-container :where(.aurax-header, .suggestions, .message, .aurax-prompt-wrapper, .disclaimer-text) {
     margin: 0 auto;
     width: 100%;
     padding: 0 20px;
@@ -810,6 +813,17 @@ pointer-events: auto;
     scrollbar-width: none;
 }
 
+
+
+.aurax-container :is(.aurax-header, .suggestions){
+    display: none;
+}
+
+
+
+
+
+
 .suggestions .suggestions-item{
     width: 228px;
     padding: 18px;
@@ -826,7 +840,7 @@ pointer-events: auto;
 }
 
 .suggestions .suggestions-item:hover{
-  background: var(--bg-secondary);
+  background: rgb(82, 82, 82);
 }
 
 
@@ -836,12 +850,12 @@ pointer-events: auto;
 }
 
 .suggestions .suggestions-item span {
-
     height: 45px;
     width: 45px;
     margin-top: 35px;
     display: flex;
     align-self: flex-end;
+    align-items: center;
     justify-content: center;
     border-radius: 50%;
     color: #1d7efd;
@@ -850,6 +864,253 @@ pointer-events: auto;
 }
 
 
+
+.suggestions .suggestions-item:nth-child(2) span{
+    color: #28a745;
+}
+
+.suggestions .suggestions-item:nth-child(3) span{
+    color: #ffc107;
+}
+
+.suggestions .suggestions-item:nth-child(4) span{
+    color: #6f42c1;
+}
+
+
+/*chats container styling */
+
+.aurax-container .chats-container {
+    display: flex;
+    gap:20px;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+.chats-container .message{
+    display: flex;
+    gap: 11px;
+    align-items: center;
+}
+
+
+.chats-container .bot-message .avatar{
+    height: 43px;
+    width: 43px;
+    flex-shrink: 0;
+    padding: 6px;
+    align-self: flex-start;
+    margin-right: -7px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--color-placeholder);
+}
+
+
+.chats-container .bot-message.loading .avatar{
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate{
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.chats-container .message .message-text{
+    padding: 3px 16px;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.chats-container .bot-message {
+    margin: 9px auto;
+}
+
+
+
+
+   
+
+.chats-container .user-message{
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+
+
+.chats-container .user-message .message-text{
+    padding: 12px 16px;
+    max-width: 75%;
+    border-radius: 13px 13px 13px 13px;
+    background: rgb(82, 82, 82);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* aurax prompt style */
+
+.aurax-prompt-container{
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px 0;
+      margin-top: auto;
+      background: var(--bg-primary);
+}
+
+
+.aurax-prompt-container :where(.aurax-prompt-wrapper,
+.aurax-prompt-form,.aurax-prompt-actions){
+     display: flex;
+     gap: 12px;
+     height: 56px;
+     align-items: center;
+}
+
+.aurax-prompt-wrapper .aurax-prompt-form{
+    width: 100%;
+    height: 100%;
+    border-radius: 130px;
+    background: var(--bg-secondary);
+}
+
+
+.aurax-prompt-form  .aurax-prompt-input {
+      height: 100%;
+      width: 100%;
+      background: none;
+      outline: none;
+      border: none;
+      font-size: 1rem;
+      padding-left: 24px;
+      color: #ccc;
+
+}
+
+
+.aurax-prompt-form  .aurax-prompt-input::placeholder {
+ color: #ccc;
+}
+
+.aurax-prompt-wrapper button {
+    width: 56px;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    transition: 0.3s ease;
+}
+
+.aurax-prompt-wrapper :is(button:hover, .file-icon, #cancel-file-btn) {
+  background: rgb(82, 82, 82);
+}
+
+
+.aurax-prompt-form .aurax-prompt-actions {
+  gap: 5px;
+  margin-right: 7px;
+}
+
+
+.aurax-prompt-wrapper .aurax-prompt-form :where(.file-upload-wrapper,button, img) {
+    position: relative;
+    height: 45px;
+    width: 45px;
+}
+
+
+
+
+.aurax-prompt-form #send-prompt-btn{
+    color: #fff;
+    display: none;
+    background: #d72cff ;
+}
+
+
+.aurax-prompt-form .aurax-prompt-input:valid ~ .aurax-prompt-actions
+#send-prompt-btn{
+    display: block;
+}
+
+
+
+
+
+
+.aurax-prompt-form #send-prompt-btn:hover{
+    background: black;
+}
+
+
+
+.aurax-prompt-form .file-upload-wrapper :where(button, img){
+    position: absolute;
+    border-radius: 50%;
+    object-fit: cover;
+    display: none;
+}
+
+.aurax-prompt-form .file-upload-wrapper #add-file-btn,
+.aurax-prompt-form .file-upload-wrapper.active.img-attached img,
+.aurax-prompt-form .file-upload-wrapper.active.file-attached .file-icon,
+.aurax-prompt-form .file-upload-wrapper.active:hover #cancel-file-btn
+{
+    display: block;
+}
+
+
+.aurax-prompt-form .file-upload-wrapper.active #add-file-btn{
+    display: none;
+}
+
+
+
+.aurax-prompt-form #cancel-file-btn{
+    color: #d62939;
+}
+
+
+.aurax-prompt-form .file-icon{
+    color: #d72cff;
+}
+
+
+
+
+
+
+
+
+
+.aurax-prompt-container .disclaimer-text{
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 16px 20px 0;
+    color: #ccc;
+}
 
 
 

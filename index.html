@@ -9,7 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
      <!--icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
     <link rel="stylesheet" href="style.css">
       <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
@@ -204,14 +205,35 @@
       </li> 
     </ul>
 
+     <div class="chats-container"> </div>
+
+
+
+     </div>
+
+
+
 
    <div class="aurax-prompt-container">
     <div class="aurax-prompt-wrapper">
       <form action="#" class="aurax-prompt-form">
-        <input type="aurax-text" placeholder="Ask Aurax" class="aurax-prompt-input" required>
+        <input type="aurax-text" placeholder="Ask Aurax"
+         class="aurax-prompt-input" required>
         <div class="aurax-prompt-actions">
-          <button id="add-file-btn" type="button"
+         <div class="file-upload-wrapper">
+          <img src="#" alt="" class="file-preview">
+          <input type="file" accept="image/*, .pdf, .txt, .csv" id="file-input" hidden>
+          <button type="button" class="file-icon
+          material-symbols-rounded">description</button>
+           <button id="add-file-btn" type="button"
            class="material-symbols-rounded">attach_file</button>
+            <button id="cancel-file-btn" type="button"
+           class="material-symbols-rounded">close</button>
+         </div>
+
+
+
+         
           <button id="send-prompt-btn" 
            class="material-symbols-rounded">arrow_upward</button>
         </div>
