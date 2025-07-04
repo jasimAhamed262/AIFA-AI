@@ -815,7 +815,7 @@ pointer-events: auto;
 
 
 
-.aurax-container :is(.aurax-header, .suggestions){
+body.chats-active .aurax-container :where(.aurax-header, .suggestions){
     display: none;
 }
 
@@ -953,9 +953,26 @@ pointer-events: auto;
     background: rgb(82, 82, 82);
 }
 
+.chats-container .user-message .img-attachment{
+    width: 50%;
+    margin-top: -7px;
+    border-radius: 13px 3px 13px 13px;
+}
+
+.chats-container .user-message .file-attachment{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 10px;
+    margin-top: -7px;
+    border-radius: 13px 3px 13px 13px;
+    background: var(--bg-secondary);
+}
 
 
-
+.chats-container .user-message .file-attachment span{
+    color: #d72cff;
+}
 
 
 
@@ -1088,7 +1105,7 @@ pointer-events: auto;
 
 
 
-.aurax-prompt-form #cancel-file-btn{
+.aurax-prompt-form :is(#cancel-file-btn, #stop-response-btn:hover){
     color: #d62939;
 }
 
@@ -1098,6 +1115,15 @@ pointer-events: auto;
 }
 
 
+.aurax-prompt-form #stop-response-btn,
+body.bot-responding .aurax-prompt-form .file-upload-wrapper
+{
+    display: none;
+}
+
+body.bot-responding .aurax-prompt-form #stop-response-btn {
+    display: block;
+}
 
 
 
@@ -1111,6 +1137,7 @@ pointer-events: auto;
     padding: 16px 20px 0;
     color: #ccc;
 }
+
 
 
 
@@ -1162,6 +1189,23 @@ pointer-events: auto;
         font-size: 2.5rem;
      }
 
+     
+    .aurax-container{
+        padding: 20px 0 100px
+    }
+
+    .aurax-header :is(.heading, .sub-heading){
+        font-size: 2rem;
+        line-height: 1.4;
+    }
+
+    .aurax-prompt-form .file-upload-wrapper.active #cancel-file-btn{
+        opacity: 0;
+    }
+
+    .aurax-prompt-wrapper.hide-controls :where(#delete-chats-btn){
+        display: none;
+    }
 
 
 }

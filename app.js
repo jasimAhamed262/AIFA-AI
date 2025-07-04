@@ -366,6 +366,7 @@ const chatsContainer = document.querySelector(".chats-container")
 const auraxPromptForm = document.querySelector(".aurax-prompt-form")
 const auraxPromptInput = auraxPromptForm.querySelector(".aurax-prompt-input")
 const fileInput = auraxPromptForm.querySelector("#file-input")
+const fileUploadWrapper = auraxPromptForm.querySelector(".file-upload-wrapper")
 
 
 //api setup
@@ -375,10 +376,9 @@ const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-
 
 
 
-
-
-let userMessage = "";
+let typingInterval,controller
 const chatHistory =[]
+const userData = { message: "", file: {} }
 
 
 //function to create message elements
@@ -401,13 +401,15 @@ const typingEffect = (text, textElement, botMsgDiv) => {
   let wordIndex =0;
 
   //set an interval to type each word
-const typingInterval = setInterval(() => {
+ typingInterval = setInterval(() => {
   if(wordIndex < words.length){
     textElement.textContent += (wordIndex ===0 ? "": " ") + words[wordIndex++];
-    botMsgDiv.classList.remove("loading");
     scrollToBottom();
   } else{
     clearInterval(typingInterval);
+    botMsgDiv.classList.remove("loading");
+    document.body.classList.remove("bot-responding")
+
   }
 }, 40)
 
@@ -430,13 +432,18 @@ const typingInterval = setInterval(() => {
 const generateResponse = async (botMsgDiv) => {
 
   const textElement = botMsgDiv.querySelector(".message-text")
+  controller = new AbortController()
 
 
 
-  //add user message to the chat history
+  //add user message and file data to the chat history
   chatHistory.push({
      role: "user",
-     parts: [{text:userMessage}]
+     parts: [{text:userData.message},
+       ...(userData.file.data ? 
+        [
+          { inline_data: (({ fileName, isImage,
+      ...rest}) => rest)(userData.file)}]: [])]
   })
 
 
@@ -446,7 +453,8 @@ const generateResponse = async (botMsgDiv) => {
       const ressponse = await fetch(API_URL,{
          method: "POST",
          headers: {"Content-Type": "application/json"},
-         body: JSON.stringify({contents: chatHistory})
+         body: JSON.stringify({contents: chatHistory}),
+         signal: controller.signal
       });
 
 
@@ -455,11 +463,16 @@ const generateResponse = async (botMsgDiv) => {
       
       //Process the response text and display with typing effect
       const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*([^*]+)\*\*/g, "$1").trim()
-      typingEffect(responseText, textElement, botMsgDiv )
+      typingEffect(responseText, textElement, botMsgDiv)
+      
       chatHistory.push({role:"model",parts:[{text:responseText}]})
-
-  } catch (error){
-        console.log(error)
+    } catch (error){
+        textElement.style.color = "#d62939"
+        textElement.textContent = error.name === "AbortError" ? "Response generation stopped." : error.message;
+        botMsgDiv.classList.remove("loading");
+        document.body.classList.remove("bot-responding")
+  } finally {
+    userData.file = {}
   }
 }
 
@@ -469,17 +482,28 @@ const generateResponse = async (botMsgDiv) => {
 //handleform submission
 const handleeFormSubmit = (e) => {
   e.preventDefault()
-  userMessage = auraxPromptInput.value.trim()
-  if(!userMessage) return
+  const userMessage = auraxPromptInput.value.trim()
+  if(!userMessage || document.body.classList.contains("bot-responding")
+) return
 
 
   auraxPromptInput.value =""
+  userData.message = userMessage
+  document.body.classList.add("bot-responding", "chats-active")
+  fileUploadWrapper.classList.remove("active", "img-attached" , "file-attached")
+
+  
 
 
-  //user message html and add in the container
-  const userMsgHTML = `<p class="message-text"></p>`
+  //generate user message html and add in the container
+  const userMsgHTML = `
+  <p class="message-text"></p>
+   ${userData.file.data ? (userData.file.isImage ? `<img src="data:${userData.file.mime_type};base64,
+   ${userData.file.data}" class="img-attachment" />` :`<p class="file-attachment"><span
+    class="material-symbols-rounded">description</span>${userData.file.fileName}</p>`):""}
+  `;
+
   const userMsgDiv = createMsgElement(userMsgHTML,"user-message")
-
   userMsgDiv.querySelector(".message-text").textContent = userMessage;
   chatsContainer.appendChild(userMsgDiv)
   scrollToBottom()
@@ -498,16 +522,72 @@ const handleeFormSubmit = (e) => {
   }, 600)
 }
 
-//handle file input change
+//handle file input change (file upload)
 fileInput.addEventListener("change", () => {
   const file = fileInput.files[0]
   if(!file) return
 
-  console.log(file)
+  const isImage = file.type.startsWith("image/")
+  const reader = new FileReader()
+  reader.readAsDataURL(file)
+
+
+  reader.onload = (e) => {
+    fileInput.value = "";
+    const base64String = e.target.result.split(",")[1]
+    fileUploadWrapper.querySelector(".file-preview").src = e.target.result;
+    fileUploadWrapper.classList.add("active", isImage ? "img-attached" : "file-attached") 
+   
+    //store file data in userData obj
+    userData.file = { fileName: file.name, data: base64String, mime_type: file.type, isImage}
+    
+
+  
+  }
+
+})
+
+//cancel file upload
+document.querySelector("#cancel-file-btn").addEventListener("click", () => {
+  userData.file ={}
+  fileUploadWrapper.classList.remove("active", "img-attached" , "file-attached")
+})
+
+//stop ongoing bot response
+document.querySelector("#stop-response-btn").addEventListener("click", () => {
+  userData.file ={}
+  controller?.abort()
+  clearInterval(typingInterval) 
+  chatsContainer.querySelector(".bot-message.loading").classList.remove("loading")
+  document.body.classList.remove("bot-responding")
 })
 
 
 
+//delete all chats
+document.querySelector("#delete-chats-btn").addEventListener("click", () => {
+  chatHistory.length = 0;
+  chatsContainer.innerHTML = ""
+    document.body.classList.remove("bot-responding", "chats-active")
+
+})
+
+//handle suggestion click
+document.querySelectorAll(".suggestions-item").forEach(item => {
+  item.addEventListener("click", ()=>{
+    auraxPromptInput.value = item.querySelector(".text").textContent
+    auraxPromptForm.dispatchEvent(new Event("submit"))
+  })
+})
+
+
+//show/hide contorls for mobile hotspot on prompt input focus
+document.addEventListener("click", ({target}) => {
+  const wrapper = document.querySelector(".aurax-prompt-wrapper");
+  const shouldHide = target.classList.contains("aurax-prompt-input") || (wrapper.classList.contains
+    ("hide-controls") && (target.id === "add-file-btn" || target.id === "stop-response-btn"))
+    wrapper.classList.toggle("hide-controls", shouldHide)
+})
 
 
 
