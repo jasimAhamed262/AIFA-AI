@@ -133,8 +133,101 @@ function  initAnimations(){
       duration: 1,
       ease: "back.out(1.7)"
     }, "-=0.8");
+    // Page 3: Aurax section animation
+const auraxT1 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".aurax-container",
+    start: "top 80%",
+    toggleActions: "play none none reverse"
+  }
+});
+
+auraxT1
+  .from(".auraxhead", {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    ease: "power2.out"
+  })
+  .from(".auraxsub", {
+    opacity: 0,
+    y: 20,
+    duration: 0.8,
+    ease: "power2.out"
+  }, "-=0.5")
+  .from(".suggestions", {
+    opacity: 0,
+    y: 20,
+    duration: 0.8,
+    ease: "power2.out"
+  }, "-=0.4")
+  .from(".suggestions-item", {
+    opacity: 0,
+    y: 20,
+    stagger: 0.15,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.6")
+  .from(".aurax-prompt-wrapper", {
+    opacity: 0,
+    y: 40,
+    duration: 0.8,
+    ease: "power2.out"
+  }, "-=0.5");
+
+  
+
+// Page 4: Footer animation
+const footerT1 = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".footer-container",
+    start: "top 90%",
+    toggleActions: "play none none reverse"
+  }
+});
+
+footerT1
+  .from(".cta-section", {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    ease: "power2.out"
+  })
+  .from(".cta-title", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.4")
+  .from(".cta-subtitle", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.5")
+  .from(".cta-button", {
+    opacity: 0,
+    scale: 0.9,
+    duration: 0.6,
+    ease: "back.out(1.7)"
+  }, "-=0.4")
+  .from(".footer-content > *", {
+    opacity: 0,
+    y: 20,
+    stagger: 0.15,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.4")
+  .from(".footer-bottom", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.4");
 
 }
+
+
 
 
 
