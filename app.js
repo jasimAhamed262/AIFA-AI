@@ -11,50 +11,50 @@ const ScrollTrigger = window.ScrollTrigger // Declare ScrollTrigger variable
 const menuToggle = document.getElementById("menuToggle")
 const mobileMenu = document.getElementById("mobileMenu")
 
-menuToggle.addEventListener("click",()=>{
-    menuToggle.classList.toggle("active")
-    mobileMenu.classList.toggle("active")
+menuToggle.addEventListener("click", () => {
+  menuToggle.classList.toggle("active")
+  mobileMenu.classList.toggle("active")
 
-   if(mobileMenu.classList.contains("active")){
-      body.style.overflow = "hidden"
-   } else{
-    body.style.overflow =""
-   }
+  if (mobileMenu.classList.contains("active")) {
+    body.style.overflow = "hidden"
+  } else {
+    body.style.overflow = ""
+  }
 })
 
 
 //loading animation
 
-function initLoader(){
-    const loader = document.querySelector(".loader")
-    const loaderText = document.querySelector(".loader-text")
-    const loaderProgress = document.querySelector(".loader-progress")
+function initLoader() {
+  const loader = document.querySelector(".loader")
+  const loaderText = document.querySelector(".loader-text")
+  const loaderProgress = document.querySelector(".loader-progress")
 
-    //animation loadeer
-    gsap.to(loaderText,{
-        opacity:1,
-        duration:0.7,
-        ease:"power2.out",
-    })
+  //animation loadeer
+  gsap.to(loaderText, {
+    opacity: 1,
+    duration: 0.7,
+    ease: "power2.out",
+  })
 
 
-    //progress bar
+  //progress bar
 
-    gsap.to(loaderProgress,{
-        width:"100%",
-        duration:2,
-        ease:"power2.inOut",
-        onComplete:() =>{
-             gsap.to(loader,{
-                opacity:0,
-                duration:0.7,
-                onComplete: () =>{
-                    loader.style.display = "none"
-                    initAnimations()
-                }
-             })
+  gsap.to(loaderProgress, {
+    width: "100%",
+    duration: 2,
+    ease: "power2.inOut",
+    onComplete: () => {
+      gsap.to(loader, {
+        opacity: 0,
+        duration: 0.7,
+        onComplete: () => {
+          loader.style.display = "none"
+          initAnimations()
         }
-    })
+      })
+    }
+  })
 }
 
 
@@ -65,42 +65,42 @@ window.addEventListener("load", initLoader)
 
 
 // initlaize all animations
-function  initAnimations(){
-    //nav animatoin
-    gsap.to("nav", {
-        y:0,
-        duration:1,
-        ease:"power3.out",
-    }) 
+function initAnimations() {
+  //nav animatoin
+  gsap.to("nav", {
+    y: 0,
+    duration: 1,
+    ease: "power3.out",
+  })
 
-    //main animation
+  //main animation
 
-    const mainT1 = gsap.timeline()
-    mainT1
-      .to(".tag-box",{
-        opacity:1,
-        filter: 'blur(0px)',
-        y:0,
-        duration: 1.2,
-        ease:"power3.out",
-      })
+  const mainT1 = gsap.timeline()
+  mainT1
+    .to(".tag-box", {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      duration: 1.2,
+      ease: "power3.out",
+    })
 
-      .to(".headd",{
-        opacity:1,
-        filter: 'blur(0px)',
-        y:0,
-        duration: 0.8,
-        ease:"power3.out",
-      },"-=0.5")   
-      .to(".description",{
-        opacity:1,
-        filter: 'blur(0px)',
-        y:0,
-        duration: 0.8,
-        ease:"power3.out",
-      },"-=0.3")   
+    .to(".headd", {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      duration: 0.8,
+      ease: "power3.out",
+    }, "-=0.5")
+    .to(".description", {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      duration: 0.8,
+      ease: "power3.out",
+    }, "-=0.3")
 
-    // second page (smoosh section) animation
+  // second page (smoosh section) animation
   const smooshT1 = gsap.timeline({
     scrollTrigger: {
       trigger: ".smoosh",
@@ -133,97 +133,97 @@ function  initAnimations(){
       duration: 1,
       ease: "back.out(1.7)"
     }, "-=0.8");
-    // Page 3: Aurax section animation
-const auraxT1 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".aurax-container",
-    start: "top 80%",
-    toggleActions: "play none none reverse"
-  }
-});
+  // Page 3: Aurax section animation
+  const auraxT1 = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".aurax-container",
+      start: "top 80%",
+      toggleActions: "play none none reverse"
+    }
+  });
 
-auraxT1
-  .from(".auraxhead", {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    ease: "power2.out"
-  })
-  .from(".auraxsub", {
-    opacity: 0,
-    y: 20,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.5")
-  .from(".suggestions", {
-    opacity: 0,
-    y: 20,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.4")
-  .from(".suggestions-item", {
-    opacity: 0,
-    y: 20,
-    stagger: 0.15,
-    duration: 0.6,
-    ease: "power2.out"
-  }, "-=0.6")
-  .from(".aurax-prompt-wrapper", {
-    opacity: 0,
-    y: 40,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.5");
+  auraxT1
+    .from(".auraxhead", {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power2.out"
+    })
+    .from(".auraxsub", {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.5")
+    .from(".suggestions", {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.4")
+    .from(".suggestions-item", {
+      opacity: 0,
+      y: 20,
+      stagger: 0.15,
+      duration: 0.6,
+      ease: "power2.out"
+    }, "-=0.6")
+    .from(".aurax-prompt-wrapper", {
+      opacity: 0,
+      y: 40,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.5");
 
-  
 
-// Page 4: Footer animation
-const footerT1 = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".footer-container",
-    start: "top 90%",
-    toggleActions: "play none none reverse"
-  }
-});
 
-footerT1
-  .from(".cta-section", {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    ease: "power2.out"
-  })
-  .from(".cta-title", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    ease: "power2.out"
-  }, "-=0.4")
-  .from(".cta-subtitle", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    ease: "power2.out"
-  }, "-=0.5")
-  .from(".cta-button", {
-    opacity: 0,
-    scale: 0.9,
-    duration: 0.6,
-    ease: "back.out(1.7)"
-  }, "-=0.4")
-  .from(".footer-content > *", {
-    opacity: 0,
-    y: 20,
-    stagger: 0.15,
-    duration: 0.6,
-    ease: "power2.out"
-  }, "-=0.4")
-  .from(".footer-bottom", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    ease: "power2.out"
-  }, "-=0.4");
+  // Page 4: Footer animation
+  const footerT1 = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".footer-container",
+      start: "top 90%",
+      toggleActions: "play none none reverse"
+    }
+  });
+
+  footerT1
+    .from(".cta-section", {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power2.out"
+    })
+    .from(".cta-title", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power2.out"
+    }, "-=0.4")
+    .from(".cta-subtitle", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power2.out"
+    }, "-=0.5")
+    .from(".cta-button", {
+      opacity: 0,
+      scale: 0.9,
+      duration: 0.6,
+      ease: "back.out(1.7)"
+    }, "-=0.4")
+    .from(".footer-content > *", {
+      opacity: 0,
+      y: 20,
+      stagger: 0.15,
+      duration: 0.6,
+      ease: "power2.out"
+    }, "-=0.4")
+    .from(".footer-bottom", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power2.out"
+    }, "-=0.4");
 
 }
 
@@ -254,7 +254,7 @@ const examplePrompts = [
 ];
 
 //fill prompt with random example
-promptBtn.addEventListener("click", () =>{
+promptBtn.addEventListener("click", () => {
   const prompt = examplePrompts[Math.floor(Math.random() * examplePrompts.length)]
   promptInput.value = prompt
   promptInput.focus();
@@ -280,16 +280,16 @@ const FREE_APIS = {
 }
 
 const getImageDimensions = (aspectRatio, baseSize = 512) => {
-   const [width, height] = aspectRatio.split("/").map(Number)
-   const scaleFactor = baseSize / Math.sqrt(width * height)
+  const [width, height] = aspectRatio.split("/").map(Number)
+  const scaleFactor = baseSize / Math.sqrt(width * height)
 
-   let calculatedWidth = Math.round(width * scaleFactor)
-   let calculatedHeight = Math.round(height * scaleFactor)
+  let calculatedWidth = Math.round(width * scaleFactor)
+  let calculatedHeight = Math.round(height * scaleFactor)
 
-   calculatedWidth = Math.floor(calculatedWidth/16) * 16
-   calculatedHeight = Math.floor(calculatedHeight/16) * 16
+  calculatedWidth = Math.floor(calculatedWidth / 16) * 16
+  calculatedHeight = Math.floor(calculatedHeight / 16) * 16
 
-   return {width: calculatedWidth, height: calculatedHeight}
+  return { width: calculatedWidth, height: calculatedHeight }
 }
 
 //replace loading spinner with actual image
@@ -338,11 +338,11 @@ const generateWithPollinations = async (promptText, width, height, seed) => {
   try {
     const encodedPrompt = encodeURIComponent(promptText)
     const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&seed=${seed}&enhance=true&nologo=true`
-    
+
     // Test if image loads successfully
     const response = await fetch(imageUrl)
     if (!response.ok) throw new Error('Failed to generate image')
-    
+
     return imageUrl
   } catch (error) {
     throw new Error(`Pollinations API failed: ${error.message}`)
@@ -368,7 +368,7 @@ const generateSingleImage = async (promptText, width, height, seed) => {
     return await generateWithPollinations(promptText, width, height, seed)
   } catch (error) {
     console.warn('Primary API failed, using fallback:', error.message)
-    
+
     try {
       // Fallback to Picsum (just for demo - shows placeholder images)
       return await generateWithPicsum(width, height, seed)
@@ -380,37 +380,37 @@ const generateSingleImage = async (promptText, width, height, seed) => {
 
 // Updated main generation function
 const generateImages = async (selectedModel, imageCount, aspectRatio, promptText) => {
-    const {width, height} = getImageDimensions(aspectRatio)
-    generateBtn.setAttribute("disabled", "true")
+  const { width, height } = getImageDimensions(aspectRatio)
+  generateBtn.setAttribute("disabled", "true")
 
-    // Create array of image generation promises
-    const imagePromises = Array.from({length: imageCount}, async(_, i) => {
-      try {
-        // Generate unique seed for each image
-        const seed = Date.now() + i + Math.floor(Math.random() * 1000)
-        
-        // Generate image using free APIs
-        const imageUrl = await generateSingleImage(promptText, width, height, seed)
-        
-        // Update the image card with generated image
-        updateImageCards(i, imageUrl)
-        
-      } catch (error) {
-        console.error(`Image ${i} generation failed:`, error)
-        const imgCard = document.getElementById(`img-card-${i}`)
-        if (imgCard) {
-          imgCard.classList.replace("loading", "error")
-          const statusText = imgCard.querySelector(".status-text")
-          if (statusText) {
-            statusText.textContent = "Generation failed! Please try again."
-          }
+  // Create array of image generation promises
+  const imagePromises = Array.from({ length: imageCount }, async (_, i) => {
+    try {
+      // Generate unique seed for each image
+      const seed = Date.now() + i + Math.floor(Math.random() * 1000)
+
+      // Generate image using free APIs
+      const imageUrl = await generateSingleImage(promptText, width, height, seed)
+
+      // Update the image card with generated image
+      updateImageCards(i, imageUrl)
+
+    } catch (error) {
+      console.error(`Image ${i} generation failed:`, error)
+      const imgCard = document.getElementById(`img-card-${i}`)
+      if (imgCard) {
+        imgCard.classList.replace("loading", "error")
+        const statusText = imgCard.querySelector(".status-text")
+        if (statusText) {
+          statusText.textContent = "Generation failed! Please try again."
         }
       }
-    })
+    }
+  })
 
-    // Wait for all images to complete
-    await Promise.allSettled(imagePromises)
-    generateBtn.removeAttribute("disabled")
+  // Wait for all images to complete
+  await Promise.allSettled(imagePromises)
+  generateBtn.removeAttribute("disabled")
 }
 
 //get placeholder cards with loading spinner 
@@ -418,7 +418,7 @@ const gridGallery = document.querySelector(".gallery-grid")
 
 const createImageCards = (selectedModel, imageCount, aspectRatio, promptText) => {
   gridGallery.innerHTML = "";
-  
+
   for (let i = 0; i < imageCount; i++) {
     gridGallery.innerHTML += ` <div class="img-card loading" id="img-card-${i}" style="aspect-ratio:${aspectRatio}">
                   <div class="status-container">
@@ -434,7 +434,7 @@ const createImageCards = (selectedModel, imageCount, aspectRatio, promptText) =>
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
-  
+
   const selectedModel = modelSelect.value
   const imageCount = parseInt(countSelect.value) || 1
   const aspectRatio = ratioSelect.value || "1/1"
@@ -469,13 +469,13 @@ const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-
 
 
 
-let typingInterval,controller
-const chatHistory =[]
+let typingInterval, controller
+const chatHistory = []
 const userData = { message: "", file: {} }
 
 
 //function to create message elements
-const createMsgElement = (content,...classes) => {
+const createMsgElement = (content, ...classes) => {
   const div = document.createElement("div")
   div.classList.add("message", ...classes)
   div.innerHTML = content
@@ -483,28 +483,28 @@ const createMsgElement = (content,...classes) => {
 }
 
 //scroll to the bottom of  the container
-const scrollToBottom = () => container.scrollTo({top: container.scrollHeight, behavior: "smooth"})
+const scrollToBottom = () => container.scrollTo({ top: container.scrollHeight, behavior: "smooth" })
 
 
 
 //simulate typing effect for bot responses
 const typingEffect = (text, textElement, botMsgDiv) => {
-  textElement.textContent =""
+  textElement.textContent = ""
   const words = text.split(" ")
-  let wordIndex =0;
+  let wordIndex = 0;
 
   //set an interval to type each word
- typingInterval = setInterval(() => {
-  if(wordIndex < words.length){
-    textElement.textContent += (wordIndex ===0 ? "": " ") + words[wordIndex++];
-    scrollToBottom();
-  } else{
-    clearInterval(typingInterval);
-    botMsgDiv.classList.remove("loading");
-    document.body.classList.remove("bot-responding")
+  typingInterval = setInterval(() => {
+    if (wordIndex < words.length) {
+      textElement.textContent += (wordIndex === 0 ? "" : " ") + words[wordIndex++];
+      scrollToBottom();
+    } else {
+      clearInterval(typingInterval);
+      botMsgDiv.classList.remove("loading");
+      document.body.classList.remove("bot-responding")
 
-  }
-}, 40)
+    }
+  }, 40)
 
 }
 
@@ -531,39 +531,41 @@ const generateResponse = async (botMsgDiv) => {
 
   //add user message and file data to the chat history
   chatHistory.push({
-     role: "user",
-     parts: [{text:userData.message},
-       ...(userData.file.data ? 
-        [
-          { inline_data: (({ fileName, isImage,
-      ...rest}) => rest)(userData.file)}]: [])]
+    role: "user",
+    parts: [{ text: userData.message },
+    ...(userData.file.data ?
+      [
+        {
+          inline_data: (({ fileName, isImage,
+            ...rest }) => rest)(userData.file)
+        }] : [])]
   })
 
 
 
-  try{
+  try {
     //send the cht history to the api to get a response
-      const ressponse = await fetch(API_URL,{
-         method: "POST",
-         headers: {"Content-Type": "application/json"},
-         body: JSON.stringify({contents: chatHistory}),
-         signal: controller.signal
-      });
+    const ressponse = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: chatHistory }),
+      signal: controller.signal
+    });
 
 
-      const data = await ressponse.json()
-      if(!ressponse.ok) throw new Error(data.error.message)
-      
-      //Process the response text and display with typing effect
-      const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*([^*]+)\*\*/g, "$1").trim()
-      typingEffect(responseText, textElement, botMsgDiv)
-      
-      chatHistory.push({role:"model",parts:[{text:responseText}]})
-    } catch (error){
-        textElement.style.color = "#d62939"
-        textElement.textContent = error.name === "AbortError" ? "Response generation stopped." : error.message;
-        botMsgDiv.classList.remove("loading");
-        document.body.classList.remove("bot-responding")
+    const data = await ressponse.json()
+    if (!ressponse.ok) throw new Error(data.error.message)
+
+    //Process the response text and display with typing effect
+    const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*([^*]+)\*\*/g, "$1").trim()
+    typingEffect(responseText, textElement, botMsgDiv)
+
+    chatHistory.push({ role: "model", parts: [{ text: responseText }] })
+  } catch (error) {
+    textElement.style.color = "#d62939"
+    textElement.textContent = error.name === "AbortError" ? "Response generation stopped." : error.message;
+    botMsgDiv.classList.remove("loading");
+    document.body.classList.remove("bot-responding")
   } finally {
     userData.file = {}
   }
@@ -576,41 +578,41 @@ const generateResponse = async (botMsgDiv) => {
 const handleeFormSubmit = (e) => {
   e.preventDefault()
   const userMessage = auraxPromptInput.value.trim()
-  if(!userMessage || document.body.classList.contains("bot-responding")
-) return
+  if (!userMessage || document.body.classList.contains("bot-responding")
+  ) return
 
 
-  auraxPromptInput.value =""
+  auraxPromptInput.value = ""
   userData.message = userMessage
   document.body.classList.add("bot-responding", "chats-active")
-  fileUploadWrapper.classList.remove("active", "img-attached" , "file-attached")
+  fileUploadWrapper.classList.remove("active", "img-attached", "file-attached")
 
-  
+
 
 
   //generate user message html and add in the container
   const userMsgHTML = `
   <p class="message-text"></p>
    ${userData.file.data ? (userData.file.isImage ? `<img src="data:${userData.file.mime_type};base64,
-   ${userData.file.data}" class="img-attachment" />` :`<p class="file-attachment"><span
-    class="material-symbols-rounded">description</span>${userData.file.fileName}</p>`):""}
+   ${userData.file.data}" class="img-attachment" />` : `<p class="file-attachment"><span
+    class="material-symbols-rounded">description</span>${userData.file.fileName}</p>`) : ""}
   `;
 
-  const userMsgDiv = createMsgElement(userMsgHTML,"user-message")
+  const userMsgDiv = createMsgElement(userMsgHTML, "user-message")
   userMsgDiv.querySelector(".message-text").textContent = userMessage;
   chatsContainer.appendChild(userMsgDiv)
   scrollToBottom()
 
-  
+
   setTimeout(() => {
 
-     //Generate bot message Html and add in the chats container in 600ms
-  const botMsgHTML = `<img src="aurax.svg" class="avatar">
+    //Generate bot message Html and add in the chats container in 600ms
+    const botMsgHTML = `<img src="aurax.svg" class="avatar">
 <p class="message-text">Just a sec...</p>`
-  const botMsgDiv = createMsgElement(botMsgHTML,"bot-message","loading")
-  chatsContainer.appendChild(botMsgDiv)
-  scrollToBottom()
-  generateResponse(botMsgDiv)
+    const botMsgDiv = createMsgElement(botMsgHTML, "bot-message", "loading")
+    chatsContainer.appendChild(botMsgDiv)
+    scrollToBottom()
+    generateResponse(botMsgDiv)
 
   }, 600)
 }
@@ -618,7 +620,7 @@ const handleeFormSubmit = (e) => {
 //handle file input change (file upload)
 fileInput.addEventListener("change", () => {
   const file = fileInput.files[0]
-  if(!file) return
+  if (!file) return
 
   const isImage = file.type.startsWith("image/")
   const reader = new FileReader()
@@ -629,28 +631,28 @@ fileInput.addEventListener("change", () => {
     fileInput.value = "";
     const base64String = e.target.result.split(",")[1]
     fileUploadWrapper.querySelector(".file-preview").src = e.target.result;
-    fileUploadWrapper.classList.add("active", isImage ? "img-attached" : "file-attached") 
-   
-    //store file data in userData obj
-    userData.file = { fileName: file.name, data: base64String, mime_type: file.type, isImage}
-    
+    fileUploadWrapper.classList.add("active", isImage ? "img-attached" : "file-attached")
 
-  
+    //store file data in userData obj
+    userData.file = { fileName: file.name, data: base64String, mime_type: file.type, isImage }
+
+
+
   }
 
 })
 
 //cancel file upload
 document.querySelector("#cancel-file-btn").addEventListener("click", () => {
-  userData.file ={}
-  fileUploadWrapper.classList.remove("active", "img-attached" , "file-attached")
+  userData.file = {}
+  fileUploadWrapper.classList.remove("active", "img-attached", "file-attached")
 })
 
 //stop ongoing bot response
 document.querySelector("#stop-response-btn").addEventListener("click", () => {
-  userData.file ={}
+  userData.file = {}
   controller?.abort()
-  clearInterval(typingInterval) 
+  clearInterval(typingInterval)
   chatsContainer.querySelector(".bot-message.loading").classList.remove("loading")
   document.body.classList.remove("bot-responding")
 })
@@ -661,13 +663,13 @@ document.querySelector("#stop-response-btn").addEventListener("click", () => {
 document.querySelector("#delete-chats-btn").addEventListener("click", () => {
   chatHistory.length = 0;
   chatsContainer.innerHTML = ""
-    document.body.classList.remove("bot-responding", "chats-active")
+  document.body.classList.remove("bot-responding", "chats-active")
 
 })
 
 //handle suggestion click
 document.querySelectorAll(".suggestions-item").forEach(item => {
-  item.addEventListener("click", ()=>{
+  item.addEventListener("click", () => {
     auraxPromptInput.value = item.querySelector(".text").textContent
     auraxPromptForm.dispatchEvent(new Event("submit"))
   })
@@ -675,16 +677,16 @@ document.querySelectorAll(".suggestions-item").forEach(item => {
 
 
 //show/hide contorls for mobile hotspot on prompt input focus
-document.addEventListener("click", ({target}) => {
+document.addEventListener("click", ({ target }) => {
   const wrapper = document.querySelector(".aurax-prompt-wrapper");
   const shouldHide = target.classList.contains("aurax-prompt-input") || (wrapper.classList.contains
     ("hide-controls") && (target.id === "add-file-btn" || target.id === "stop-response-btn"))
-    wrapper.classList.toggle("hide-controls", shouldHide)
+  wrapper.classList.toggle("hide-controls", shouldHide)
 })
 
 
 
-auraxPromptForm.addEventListener("submit",handleeFormSubmit)
+auraxPromptForm.addEventListener("submit", handleeFormSubmit)
 auraxPromptForm.querySelector("#add-file-btn").addEventListener("click", () => fileInput.click())
 
 
