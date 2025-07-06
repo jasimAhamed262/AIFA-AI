@@ -813,6 +813,8 @@ pointer-events: auto;
     overflow-x: auto;
     scrollbar-width: none;
     margin-left: 10%;
+      visibility: hidden;
+    pointer-events: none;
 }
 
 
